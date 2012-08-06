@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	$("tbody tr:nth-child(even)").addClass("even");
+});
+//]]>
+</script>
+{% end %}
+
+{% block content %}
+<div class="centered schedule">
+	{% autoescape None %}
+	{{ schedule['header'] }}
+	{% for table in schedule['tables'] %}
+		{{ table }}
+		<br />
+	{% end %}
+	<br />
+</div>
+
+{% end %}

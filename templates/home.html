@@ -1,16 +1,33 @@
 {% extends "base.html" %}
 
 {% block head %}
+<script type="text/javascript" src="{{ static_url('javascript/all.js')}}"></script>
 {% end %}
 
 {% block content %}
-  <h1>tornadoze!</h1>
-  {% if dbname %}
-    <h3>tables in {{ dbname }}</h3>
-    <ul>
-    {% for t in tables %}
-      <li>{{ t }}</li>
-    {% end %}
-    </ul>
-  {% end %}
+	<!-- Search -->
+	<div class="centered">
+  		<h1>Better STATE Scheduler</h1>
+  		<form id="search_courses" action="/search" method="post">
+  			<!--{{ xsrf_form_html() }} -->
+  			<p>
+  				<label for="courses" id="course_label">Course Subject</label>
+  				<input type="text" placeholder="Select a Course" class="course" id="courses" name="course"></input>
+  			</p>
+  			<div class="toggle-row">
+  				<label class="b-style" id="fall"><input type="radio" name="toggle" value="fall"><span>Fall</span></label>
+				<label class="b-style" id="spring"><input type="radio" name="toggle" value="spring"><span>Spring</span></label>
+				<label class="b-style" id="summer"><input type="radio" name="toggle" value="summer"><span>Summer</span></label>	
+  			</div>
+  			<div class="submit-row">
+  				<button class="sub-button" type="submit" id="submit">Search Courses</button>
+  			</div>
+  		</form>
+  	</div>
+  	<!-- Schedule Div -->
+  	<div class="centered schedule" id="sched"> 
+  	</div>
+  	<div class="footer">
+		<p class="footertext">© {{year}} Alex Bradley | About | Contact | <a href="http://www.psumap.com">Campus Map</a></p> 
+	</div>
 {% end %}
