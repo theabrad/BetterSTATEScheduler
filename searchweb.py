@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import logging
 
 class SearchWeb():
-	def search_course(self, semester, course):
+	def search_course(self, semester, course, num):
 		# Browser
 		br = mechanize.Browser()
 
@@ -36,18 +36,28 @@ class SearchWeb():
 		br.form['CrseLoc'] = ["UP::University Park Campus"]
 		br.form['Semester'] = [semester]
 		br.form['course_abbrev'] = [course]
+		if num!='no_num':
+			br.form['course_num'] = [num]
 		br.submit()
 
 		response = br.response().read()
 
 		return response
 
-	def get_schedule(self,semester, course):
-		html = self.search_course(semester, course)
+	def get_schedule(self,semester, course, num):
+		html = self.search_course(semester, course, num)
 		soup = BeautifulSoup(html)
 		h = HTMLParser.HTMLParser()
 
 		header = soup.find('h3',{'class':"floatleft"})
+
+		for link in soup.findAll('a'):
+			try:
+				if link['href'].startswith('google') or link['href'].startswith('view'):
+					link['href'] = 'http://schedule.psu.edu/'+link['href']
+			except KeyError:
+				pass
+
 		
 		for tag in soup.findAll('input'):
 			tag.decompose()

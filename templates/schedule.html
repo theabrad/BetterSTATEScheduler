@@ -14,6 +14,9 @@ $(document).ready(function(){
 <div class="centered schedule">
 	{% autoescape None %}
 	{{ schedule['header'] }}
+	{% if error==True %}
+	<p class="error">Course number does not exist</p>
+	{% end %}
 	{% for table in schedule['tables'] %}
 		{{ table }}
 		<br />

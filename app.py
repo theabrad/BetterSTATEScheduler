@@ -2,6 +2,8 @@ from tornado import web
 from tornado.options import options, define
 import datetime
 import json
+import re
+import logging
 from parseweb import ParseWeb
 from searchweb import SearchWeb 
 
@@ -36,17 +38,29 @@ class Courses(web.RequestHandler):
             COURSECACHE[key] = course_list
         return course_list
 
+    def clear_cache(self):
+        current_month = datetime.datetime.now().month
+        prev_month = current_month
+        if current_month != prev_month:
+            COURSECACHE = {}
+
 class Search(web.RequestHandler):
     def post(self):
-        course = self.get_argument("course")
+        course_full = self.get_argument("course")
         sem = self.get_argument("toggle")
-        course = self.split_course(course)
+        course = self.split_course(course_full)
         semester = self.select_semester(sem)
+        num = self.get_course_num(course_full)
 
         search = SearchWeb()
-        schedule = search.get_schedule(semester, course)
+        try:
+            schedule = search.get_schedule(semester, course, num) #semester course number
+            error=False
+        except:
+            schedule = search.get_schedule(semester, course, '')
+            error=True          
 
-        self.render("schedule.html", schedule=schedule)
+        self.render("schedule.html", schedule=schedule, year=year, error=error)
 
     def select_semester(self, toggle):
         if toggle=='fall':
@@ -61,8 +75,34 @@ class Search(web.RequestHandler):
 
     def split_course(self, course):
         seperator = ' - '
-        rest = course.split(seperator,1)[0]
+        if course.find(seperator)!=-1:
+            rest = course.split(seperator,1)[0]
+        else:
+            rest = course.split(' ',-1)[0]
+            logging.error(rest)
+        rest = rest.upper()  
         return rest
+
+    def get_course_num(self, course):
+        num = course.split(' ',-1)[-1]
+        logging.error(num)
+        if num[0].isdigit():
+            return num
+        else:
+            return 'no_num'
+
+    def parse_course(self, course):
+        course = re.split('\W+', course)
+
+class StaticPages(web.RequestHandler):
+    def get(self, page):
+        if page=="about":
+            self.render("about.html", year=year)
+        else:
+            self.write("Page not found")
+        
+        
+
 
 
 settings = dict(
@@ -78,5 +118,6 @@ routes = [
     (r"/", MainPage),
     (r"/courses", Courses),
     (r"/search", Search),
+    (r"/pages/(.*)", StaticPages),
 ]
 

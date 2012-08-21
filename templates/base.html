@@ -7,7 +7,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ static_url('css/styles.css') }}" type="text/css"/>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ static_url('javascript/jquery-ui-1.8.21.custom.min.js') }}"></script>
+    <!--<script type="text/javascript" src="{{ static_url('javascript/jquery-ui-1.8.21.custom.min.js') }}"></script> -->
+    <script type="text/javascript" src="{{ static_url('javascript/autocomplete.js')}}"></script>
     <script type="text/javascript" src="{{ static_url('javascript/jqueryform.js')}}"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> 
@@ -19,6 +20,9 @@
   <body>
     <div id="content">
     {% block content %}{% end %}
+    </div>
+    <div class="footer">
+      <p class="footertext">© {{year}} Alex Bradley | <a href="pages/about" rel="facebox">About</a> | Contact | <a href="http://www.psumap.com" target="_blank">Campus Map</a></p> 
     </div>
   </body>
   {% block javascript %}

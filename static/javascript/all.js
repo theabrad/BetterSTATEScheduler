@@ -1,3 +1,7 @@
+jQuery(document).ready(function($) {
+  $('a[rel*=facebox]').facebox() 
+});
+
 /* AutoComplete */
 $(function(){
 	var course_list = []
@@ -5,19 +9,16 @@ $(function(){
 		$.each(data, function(i,item) {
 			course_list.push(item);
 		});
-
-		$('#courses').autocomplete({
-			source: course_list
+		
+		$('#courses').autocompleteArray(course_list, {
+			autoFill: false,
+			cacheLength: 10,
+			matchContains: 1
 		});
+		
 	});
 	
 });
-
-
-
-
-/* Buttons */
-
 
 /*New Button */
 $(function(){
@@ -30,16 +31,6 @@ $(function(){
 		$(this).addClass('select');
 	});
 });
-
-/* Hide the div initially */
-$(document).ready(function() {
-	$('#sched').hide();
-});
-
-
-
-
-
 
 /* Ajax Submit 
 $(document).ready(function() {
