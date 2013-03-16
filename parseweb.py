@@ -1,8 +1,11 @@
 from bs4 import BeautifulSoup
 import urllib
 import urllib2
+import datetime
 
 class ParseWeb():
+
+
 	def open_schedule_page(self, values):
 		#header
 		user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:13.0) Gecko/20100101 Firefox/13.0.1'
@@ -20,9 +23,10 @@ class ParseWeb():
 		return the_page
 
 	def get_course_list(self):
+		year = datetime.datetime.now().year
 		values = { 'CECrseLoc' : 'All',
 				   'CrseLoc' : 'UP::University Park',
-				   'Semester' : 'FALL 2012'}
+				   'Semester' : 'FALL ' + str(year)}
 
 		#parse the courses 
 		html = self.open_schedule_page(values)

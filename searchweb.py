@@ -33,7 +33,7 @@ class SearchWeb():
 		br.select_form(nr=0)
 
 		br.form['CECrseLoc'] = ["All"]
-		br.form['CrseLoc'] = ["UP::University Park Campus"]
+		br.form['CrseLoc'] = ["UP::University Park"]
 		br.form['Semester'] = [semester]
 		br.form['course_abbrev'] = [course]
 		if num!='no_num':
