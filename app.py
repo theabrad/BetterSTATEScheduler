@@ -91,9 +91,6 @@ class Search(web.RequestHandler):
         else:
             return 'no_num'
 
-    def parse_course(self, course):
-        course = re.split('\W+', course)
-
 class StaticPages(web.RequestHandler):
     def get(self, page):
         if page=="about":
