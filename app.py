@@ -1,11 +1,13 @@
 from tornado import web
 from tornado.options import options, define
+import sys
+sys.path.insert(0, '')
 import datetime
 import json
 import re
 import logging
-from parseweb import ParseWeb
-from searchweb import SearchWeb 
+from lib import parseweb
+from lib import searchweb 
 
 define("port", default=8000, help="http port", type=int)
 define("cookie_secret", default="not-much-of-a-secret")
