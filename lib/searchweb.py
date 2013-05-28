@@ -4,8 +4,37 @@ import HTMLParser
 import re
 from bs4 import BeautifulSoup
 import logging
+import datetime
+
+year = datetime.datetime.now().year
 
 class SearchWeb():
+	def select_semester(self, toggle):
+		if toggle == 'fall':
+			return "FALL " + str(year)
+		elif toggle == 'spring':
+			if datetime.datetime.now().month < 7:
+				return "SPRING " + str(year)
+			else:
+				return "SPRING " + str(year+1)
+		elif toggle == 'summer':
+			return "SUMMER " + str(year)
+
+	def split_course(self, course):
+		seperator = ' - '
+		if course.find(seperator)!=1:
+			rest = course.split(seperator,1)[0]
+		else:
+			rest = course.split(' ',-1)[0]
+		return rest.upper()
+
+	def get_course_num(self, course):
+		num = course.split(' ', -1)[-1]
+		if num[0].isdigit():
+			return num
+		else:
+			return 'no_num'
+			
 	def search_course(self, semester, course, num):
 		# Browser
 		br = mechanize.Browser()

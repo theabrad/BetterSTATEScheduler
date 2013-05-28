@@ -1,13 +1,12 @@
 from tornado import web
 from tornado.options import options, define
 import sys
-sys.path.insert(0, '')
 import datetime
 import json
 import re
 import logging
-from lib import parseweb
-from lib import searchweb 
+from lib.parseweb import ParseWeb
+from lib.searchweb import SearchWeb
 
 define("port", default=8000, help="http port", type=int)
 define("cookie_secret", default="not-much-of-a-secret")
@@ -50,11 +49,12 @@ class Search(web.RequestHandler):
     def post(self):
         course_full = self.get_argument("course")
         sem = self.get_argument("toggle")
-        course = self.split_course(course_full)
-        semester = self.select_semester(sem)
-        num = self.get_course_num(course_full)
 
         search = SearchWeb()
+        semester = search.select_semester(sem)
+        course = search.split_course(course_full)
+        num = search.get_course_num(course_full)
+
         try:
             schedule = search.get_schedule(semester, course, num) #semester course number
             error=False
@@ -63,35 +63,6 @@ class Search(web.RequestHandler):
             error=True          
 
         self.render("schedule.html", schedule=schedule, year=year, error=error)
-
-    def select_semester(self, toggle):
-        if toggle=='fall':
-            return "FALL " + str(year)
-        elif toggle=='spring':
-            if datetime.datetime.now().month < 7:
-                return "SPRING " + str(year)
-            else:
-                return "SPRING " + str(year+1)
-        elif toggle=='summer':
-            return "SUMMER " + str(year)
-
-    def split_course(self, course):
-        seperator = ' - '
-        if course.find(seperator)!=-1:
-            rest = course.split(seperator,1)[0]
-        else:
-            rest = course.split(' ',-1)[0]
-            logging.error(rest)
-        rest = rest.upper()  
-        return rest
-
-    def get_course_num(self, course):
-        num = course.split(' ',-1)[-1]
-        logging.error(num)
-        if num[0].isdigit():
-            return num
-        else:
-            return 'no_num'
 
 class StaticPages(web.RequestHandler):
     def get(self, page):
