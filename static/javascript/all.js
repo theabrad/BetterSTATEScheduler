@@ -32,35 +32,6 @@ $(function(){
 	});
 });
 
-/* Ajax Submit 
-$(document).ready(function() {
-	var options = {
-		target: '#output_schedule',
-		beforeSubmit: showRequest
-
-	};
-
-	$('#searchcourses').submit(function () {
-		$(this).ajaxSubmit(options);
-
-		return false;
-	});
-});
-
-function showRequest(formData, jqForm, options) {
-	var queryString = $.param(formData);
-	//check to see if the course is selected
-	if (!formData[0].value) {
-		alert('Please select a course');
-		return false;
-	}
-
-	alert('About to submit: \n\n' + queryString);
-
-	return false;
-}
-
-*/
 
 
 
