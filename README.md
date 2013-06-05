@@ -1,2 +1,6 @@
 A better way to search for classes at Penn State. Written in python with the tornado library.
-To run on a development server navigate to the directory and type ```python server.py```
+
+##Getting Started
+Clone the repositiory ``` git clone http://github.com/TheABrad/BetterSTATEScheduler bss```
+Run the development server by typing ```python server.py```
+Launch your browser and go to ``` http://localhost:8000 ```
