@@ -1,4 +1,4 @@
-tornado==2.2.1
-beautifulsoup4
+beautifulsoup4==4.1.0
+gunicorn==0.17.4
 mechanize
-gunicorn
+tornado==2.3
