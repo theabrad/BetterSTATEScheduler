@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "layout.html" %}
 
 {% block head %}
 <script type="text/javascript">
@@ -8,20 +8,21 @@ $(document).ready(function(){
 });
 //]]>
 </script>
-{% end %}
+{% endblock %}
 
 {% block content %}
 <div class="centered schedule">
-	{% autoescape None %}
+	{% autoescape off %}
 	{{ schedule['header'] }}
 	{% if error==True %}
 	<p class="error">Course number does not exist</p>
-	{% end %}
+	{% endif %}
 	{% for table in schedule['tables'] %}
 		{{ table }}
 		<br />
-	{% end %}
+	{% endfor %}
 	<br />
+	{% endautoescape %}
 </div>
 
-{% end %}
+{% endblock %}
