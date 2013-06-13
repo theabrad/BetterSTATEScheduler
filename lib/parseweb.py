@@ -3,6 +3,8 @@ import urllib
 import urllib2
 import datetime
 
+# ParseWeb is a class that gets the list of all courses offered at Penn State
+
 class ParseWeb():
 
 

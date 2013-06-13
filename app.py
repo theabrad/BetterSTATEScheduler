@@ -10,6 +10,8 @@ app = Flask(__name__)
 year = datetime.datetime.now().year
 COURSECACHE = {}
 
+
+# Get the list of courses and store them in a cache
 def cache_course_list():
     key = 'list'
 
