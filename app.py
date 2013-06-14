@@ -3,7 +3,7 @@ import datetime
 import json
 from lib.parseweb import ParseWeb
 from lib.searchweb import SearchWeb
-from flask import Flask, request, render_template, url_for
+from flask import Flask, jsonify, request, render_template, url_for
 
 app = Flask(__name__)
 
@@ -28,12 +28,11 @@ def cache_course_list():
 def main_page():
     return render_template("home.html", year=year)
 
-@app.route("/courses")
+@app.route("/courses.json")
 def get_courses():
     courses = cache_course_list()
     courses.sort()
-    course_json = json.dumps(courses)
-    return course_json
+    return json.dumps(courses)
 
 @app.route("/search", methods=['POST'])
 def search():
@@ -60,4 +59,4 @@ def about():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
