@@ -201,41 +201,6 @@ p {
 	background-color: #FFDEAD;
 }
 
-/* Autocomplete */
-.ui-autocomplete {
-	background-color: #ecf0f1;
-	position: absolute;
-	font-size: 10pt;
-	width: 500px;
-	color: #000000;
-	margin-left: 0px;
-	padding: 0px;
-	border-style: solid;
-	border-color: #000000;
-	border-width: 1px;
-	cursor: pointer;
-}
-
-.ui-menu {
-	list-style: none;
-	display: block;
-}
-
-.ui-menu-item {
-	font-family: 'Ubuntu', Verdana, sans-serif;
-	width: 100%;
-}
-
-.ui-menu .ui-menu-item a.ui-state-hover,
-.ui-menu .ui-menu-item a.ui-state-active {
-	background-color: #1E90FF;
-	color: #ecf0f1;
-}
-
-/* Typeahead */
-
-
-
 
 /* SCHEDULE TABLES */
 table, th, td {
