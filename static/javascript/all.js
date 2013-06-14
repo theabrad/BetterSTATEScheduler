@@ -20,6 +20,9 @@ $(document).ready(function () {
 			$(this).addClass('select');
 		});
 	});
+
+	/* Colorbox */
+	$('.about').colorbox({ rel: 'about', width: '600px'});
 });
 
 
