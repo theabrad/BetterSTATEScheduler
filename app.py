@@ -3,7 +3,7 @@ import datetime
 import json
 from lib.parseweb import ParseWeb
 from lib.searchweb import SearchWeb
-from flask import Flask, jsonify, request, render_template, url_for
+from flask import Flask, jsonify, request, render_template, url_for, redirect
 
 app = Flask(__name__)
 
@@ -39,19 +39,23 @@ def search():
     course_full = request.form['course']
     sem = request.form['toggle']
 
-    search = SearchWeb()
-    semester = search.select_semester(sem)
-    course = search.split_course(course_full)
-    num = search.get_course_num(course_full)
+    if course_full:
+        search = SearchWeb()
+        semester = search.select_semester(sem)
+        course = search.split_course(course_full)
+        num = search.get_course_num(course_full)
 
-    try:
-        schedule = search.get_schedule(semester, course, num)
-        error=False
-    except:
-        schedule = search.get_schedule(semester, course, '')
-        error=True
+        try:
+            schedule = search.get_schedule(semester, course, num)
+            error=False
+        except:
+            schedule = search.get_schedule(semester, course, '')
+            error=True
 
-    return render_template("schedule.html", schedule=schedule, year=year, error=error)
+        return render_template("schedule.html", schedule=schedule, year=year, error=error)
+
+    else:
+        return redirect(url_for('main_page'))
 
 @app.route("/about")
 def about():
