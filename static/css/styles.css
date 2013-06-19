@@ -6,7 +6,7 @@ body {
 	color: #3498db;
 }
 
-h1 {
+h1.title {
 	padding-left: 15px;
 	letter-spacing: -1px;
 	font: 400 55px/1.3 'Bree Serif', Georgia, serif;
@@ -17,6 +17,7 @@ h1 {
 h3 {
 	margin-left: 10px;
 }
+
 
 p {
 	font-family: 'Ubuntu', Verdana, sans-serif;
@@ -127,7 +128,6 @@ a {
 .b-style {
 	border-style: solid;
 	border-color: #3498db;
-	/* border-radius: 15px; */
 	border-width: 2px;
 	font-size: 130%;
 	padding: 10px;
@@ -177,7 +177,7 @@ a {
 }
 
 /* About Page */
-.aboutbss {
+.textbox {
 	padding: 15px;
 	color: #2c3e50;
 }

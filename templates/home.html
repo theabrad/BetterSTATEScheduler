@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 
 {% block head %}
-  <script type="text/javascript" src="{{ url_for('static', filename='javascript/all.js')}}"></script>
+  
 {% endblock %}
 
 {% block content %}
 	<!-- Search -->
 	<div class="centered">
-  		<h1>Better STATE Scheduler</h1>
+  		<h1 class="title">Better STATE Scheduler</h1>
   		<form id="search_courses" action="/search" method="post">
   			<p>
   				<label for="courses" id="course_label">Course Subject</label>
