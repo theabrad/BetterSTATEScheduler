@@ -1,3 +1,5 @@
+EDIT: Sadly this site no longer works as intended since Penn State has moved onto using LionPATH for course scheduling.
+
 A better way to search for classes at Penn State. Written in Python with [flask](http://flask.pocoo.org).
 
 ##Getting Started 
