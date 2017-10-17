@@ -1,7 +1,9 @@
-Flask==0.9
-Jinja2==2.6
-Werkzeug==0.8.3
 beautifulsoup4==4.1.0
+Flask==0.9
 gunicorn==0.17.4
-mechanize
-
+html5lib==1.0b8
+Jinja2==2.6
+mechanize==0.3.6
+six==1.11.0
+webencodings==0.5.1
+Werkzeug==0.8.3
